@@ -97,10 +97,10 @@ public class VoterService {
     }
 
     private void validateInput(VoterInput voterInput, boolean isUpdate){
-        if (StringUtils.isBlank(voterInput.getEmail())){
+        if (voterRepository.findByEmail(voterInput.getEmail()) != null ){
             throw new GenericOutputException("Invalid email");
         }
-        if (voterRepository.findByEmail(voterInput.getEmail()) == null ){
+        if (StringUtils.isBlank(voterInput.getEmail())){
             throw new GenericOutputException("Invalid email");
         }
         if (StringUtils.isBlank(voterInput.getName())){
