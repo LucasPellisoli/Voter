@@ -98,19 +98,19 @@ public class VoterService {
 
     private void validateInput(VoterInput voterInput, boolean isUpdate){
         if (voterRepository.findByEmail(voterInput.getEmail()) != null ){
-            throw new GenericOutputException("Invalid email");
+            throw new GenericOutputException("Invalid email!");
         }
         if (StringUtils.isBlank(voterInput.getEmail())){
-            throw new GenericOutputException("Invalid email");
+            throw new GenericOutputException("Email is required!");
         }
         if (StringUtils.isBlank(voterInput.getName())){
-            throw new GenericOutputException("Invalid name");
+            throw new GenericOutputException("Name is required!");
         }
         if (voterInput.getName().length() < 5){
-            throw new GenericOutputException("Erro");
+            throw new GenericOutputException("Minimal of letters 5");
         }
         if (voterInput.getName().indexOf(" ") == -1){
-            throw new GenericOutputException("Erro");
+            throw new GenericOutputException("Is mandatory to have first and last name");
         }
         if (!StringUtils.isBlank(voterInput.getPassword())){
             if (!voterInput.getPassword().equals(voterInput.getPasswordConfirm())){
